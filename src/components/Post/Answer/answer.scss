@@ -1,0 +1,65 @@
+.write-answer {
+    small {
+        color: var(--dgray);
+
+        b {
+            color: var(--ddgray);
+            font-weight: 600;
+        }
+    }
+
+    .editor {
+        outline: 3px solid transparent;
+        transition: 150ms;
+        border-radius: calc(var(--radius) - 2px);
+
+        &:focus-within {
+            outline: 3px solid var(--light-primary);
+            animation: shake 0.3s;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        .editor {
+            margin-bottom: 4px;
+        }
+
+        .action {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+            margin-top: 24px;
+
+            .publish {
+                width: fit-content;
+                min-width: 200px;
+            }
+        }
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

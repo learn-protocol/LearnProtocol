@@ -1,0 +1,27 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 40px;
+        min-height: 40px;
+        min-width: 40px;
+        border-radius: 4px;
+        border: 1px solid var(--primary);
+        color: var(--primary);
+
+        &.active {
+            background-color: var(--primary);
+            color: white;
+        }
+    }
+
+    .dots {
+        color: var(--ddgray);
+    }
+}

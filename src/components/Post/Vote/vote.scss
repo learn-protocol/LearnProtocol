@@ -1,0 +1,52 @@
+.votes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 24px;
+
+    .accepted {
+        margin-bottom: 4px;
+    }
+
+    .accept-answer {
+        margin-bottom: 4px;
+        cursor: pointer;
+
+        svg path {
+            transition: 150ms;
+        }
+
+        &:hover {
+            svg path {
+                color: var(--ddgray);
+            }
+        }
+    }
+
+    .vote-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        padding: 12px;
+        border: 1px solid var(--gray);
+        transition: 150ms;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #f5f5f5;
+        }
+
+        &.voted {
+            color: #fff;
+            background-color: var(--primary);
+        }
+    }
+
+    p {
+        font-size: 24px;
+        font-family: "Poppins", sans-serif;
+    }
+}
