@@ -159,7 +159,7 @@
                 border-radius: 8px;
                 transition: 300ms;
 
-                > div:first-child {
+                >div:first-child {
                     display: flex;
                     gap: 24px;
                 }
@@ -185,9 +185,13 @@
                     }
                 }
 
-                > div:nth-child(2) {
+                >div:nth-child(2) {
                     flex: 1;
                 }
+            }
+
+            &:has(.accepted) .accept-answer {
+                display: none;
             }
         }
     }

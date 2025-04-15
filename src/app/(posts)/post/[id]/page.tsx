@@ -115,6 +115,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
                                             id={answer.id}
                                             voters={answer.voters}
                                             postAuthor={post.userId}
+                                            answerAuthor={answer.userId}
                                             isAccepted={answer.isAccepted}
                                             votes={answer.upvotes - answer.downvotes}
                                         />

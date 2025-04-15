@@ -83,17 +83,19 @@ export async function AnswerPost(state, formData: FormData): Promise<ReturnError
     }
 
     // Check if user has already answered the post
-    const existingAnswer = await db
-        .select()
-        .from(answers)
-        .where(and(eq(answers.userId, user.ocid), eq(answers.postId, postID)));
+    if (process.env.NODE_ENV !== "development") {
+        const existingAnswer = await db
+            .select()
+            .from(answers)
+            .where(and(eq(answers.userId, user.ocid), eq(answers.postId, postID)));
 
-    if (existingAnswer.length) {
-        return {
-            errors: {
-                content: "You have already answered this post, you can edit your answer instead.",
-            },
-        };
+        if (existingAnswer.length) {
+            return {
+                errors: {
+                    content: "You have already answered this post, you can edit your answer instead.",
+                },
+            };
+        }
     }
 
     // Captcha validation

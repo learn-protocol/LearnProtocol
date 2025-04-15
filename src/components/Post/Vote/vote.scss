@@ -39,6 +39,15 @@
             background-color: #f5f5f5;
         }
 
+        &.disabled:not(.voted) {
+            background-color: #f5f5f5;
+            cursor: default;
+
+            &:hover {
+                background-color: #f1f1f1;
+            }
+        }
+
         &.voted {
             color: #fff;
             background-color: var(--primary);

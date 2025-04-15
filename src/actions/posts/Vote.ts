@@ -6,8 +6,8 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import Upvote from "@/lib/upvote";
 import GetUser from "../auth/GetUser";
-import { answers, posts, stats, users, votes } from "@/db/schema";
 import { increment } from "@/lib/sql";
+import { answers, posts, stats, users, votes } from "@/db/schema";
 
 export async function Vote({
     answerID,
@@ -114,7 +114,10 @@ export async function Vote({
         db
             .update(users)
             .set({
-                balance: user.balance + (voteType === 1 ? upvote.upvotePrize : -upvote.downvoteCutoff),
+                balance: increment(
+                    users.balance,
+                    voteType === 1 ? upvote.upvotePrize : -upvote.downvoteCutoff,
+                ),
             })
             .where(eq(users.ocid, answer.userId));
 

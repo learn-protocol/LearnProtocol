@@ -80,6 +80,21 @@ export async function AcceptAnswer({ answerID }: { answerID: number }): Promise<
         };
     }
 
+    // Check if post has an accepted answer
+    const existingAcceptedAnswer = (
+        await db
+            .select()
+            .from(answers)
+            .where(and(eq(answers.postId, answer.postId), eq(answers.isAccepted, true)))
+    )?.[0];
+    if (existingAcceptedAnswer) {
+        return {
+            errors: {
+                answer: "This post already has an accepted answer",
+            },
+        };
+    }
+
     // Accept the answer
     await db
         .update(answers)

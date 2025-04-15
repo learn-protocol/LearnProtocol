@@ -14,17 +14,20 @@ export default function Vote({
     id,
     votes,
     postAuthor,
+    answerAuthor,
     voters = [],
     isAccepted = false,
 }: {
     id: number;
     votes: number;
     postAuthor: string;
+    answerAuthor: string;
     voters?: { user: string; isUpvote: boolean }[];
     isAccepted: boolean;
 }) {
     const user = useUserStore(s => s.user);
-    const isOwner = user?.ocid === postAuthor;
+    const isPostOwner = user?.ocid === postAuthor;
+    const isAnswerOwner = user?.ocid === answerAuthor;
     const isVoted = voters.map(v => v.user).includes(user?.ocid || "");
 
     const voteEvent = (voteType: 1 | -1) => {
@@ -32,9 +35,12 @@ export default function Vote({
             toast.error("You must be logged in to vote.");
             return;
         }
-
         if (isVoted) {
             toast.error("You have already voted.");
+            return;
+        }
+        if (isAnswerOwner) {
+            toast.error("You cannot vote on your own post.");
             return;
         }
 
@@ -86,7 +92,7 @@ export default function Vote({
                 </div>
             ) : (
                 <>
-                    {isOwner && (
+                    {isPostOwner && (
                         <div className="accept-answer" onClick={acceptAnswer}>
                             <FaCheck color="#999" size={32} />
                         </div>
@@ -96,7 +102,7 @@ export default function Vote({
             <div
                 className={
                     "vote-btn upvote " +
-                    (isVoted ? "disabled " : " ") +
+                    (isVoted || isAnswerOwner ? "disabled " : " ") +
                     (isVoted && voters.filter(v => v.user === user?.ocid)[0].isUpvote ? "voted" : "")
                 }
                 onClick={() => voteEvent(1)}
@@ -107,7 +113,7 @@ export default function Vote({
             <div
                 className={
                     "vote-btn downvote " +
-                    (isVoted ? "disabled " : " ") +
+                    ((isVoted || isAnswerOwner) ? "disabled " : " ") +
                     (isVoted && voters.filter(v => v.user === user?.ocid)[0].isUpvote === false
                         ? "voted"
                         : "")
