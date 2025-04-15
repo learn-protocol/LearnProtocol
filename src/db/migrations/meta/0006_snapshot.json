@@ -1,0 +1,480 @@
+{
+    "id": "e9137a22-cef7-475d-810a-c78238ae112c",
+    "prevId": "310f2ac3-8660-4113-bd66-b1ccbc357025",
+    "version": "7",
+    "dialect": "postgresql",
+    "tables": {
+        "public.answers": {
+            "name": "answers",
+            "schema": "",
+            "columns": {
+                "id": {
+                    "name": "id",
+                    "type": "integer",
+                    "primaryKey": true,
+                    "notNull": true,
+                    "identity": {
+                        "type": "always",
+                        "name": "answers_id_seq",
+                        "schema": "public",
+                        "increment": "1",
+                        "startWith": "1",
+                        "minValue": "1",
+                        "maxValue": "2147483647",
+                        "cache": "1",
+                        "cycle": false
+                    }
+                },
+                "userId": {
+                    "name": "userId",
+                    "type": "varchar",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "postId": {
+                    "name": "postId",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "content": {
+                    "name": "content",
+                    "type": "varchar(10000)",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "upvotes": {
+                    "name": "upvotes",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": 0
+                },
+                "downvotes": {
+                    "name": "downvotes",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": 0
+                },
+                "isAccepted": {
+                    "name": "isAccepted",
+                    "type": "boolean",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": false
+                },
+                "created_at": {
+                    "name": "created_at",
+                    "type": "timestamp",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "now()"
+                }
+            },
+            "indexes": {},
+            "foreignKeys": {
+                "answers_userId_users_ocid_fk": {
+                    "name": "answers_userId_users_ocid_fk",
+                    "tableFrom": "answers",
+                    "tableTo": "users",
+                    "columnsFrom": ["userId"],
+                    "columnsTo": ["ocid"],
+                    "onDelete": "no action",
+                    "onUpdate": "no action"
+                },
+                "answers_postId_posts_id_fk": {
+                    "name": "answers_postId_posts_id_fk",
+                    "tableFrom": "answers",
+                    "tableTo": "posts",
+                    "columnsFrom": ["postId"],
+                    "columnsTo": ["id"],
+                    "onDelete": "no action",
+                    "onUpdate": "no action"
+                }
+            },
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {},
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        },
+        "public.categories": {
+            "name": "categories",
+            "schema": "",
+            "columns": {
+                "name": {
+                    "name": "name",
+                    "type": "varchar(255)",
+                    "primaryKey": true,
+                    "notNull": true
+                },
+                "description": {
+                    "name": "description",
+                    "type": "varchar(1000)",
+                    "primaryKey": false,
+                    "notNull": false
+                }
+            },
+            "indexes": {},
+            "foreignKeys": {},
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {},
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        },
+        "public.posts": {
+            "name": "posts",
+            "schema": "",
+            "columns": {
+                "id": {
+                    "name": "id",
+                    "type": "integer",
+                    "primaryKey": true,
+                    "notNull": true,
+                    "identity": {
+                        "type": "always",
+                        "name": "posts_id_seq",
+                        "schema": "public",
+                        "increment": "1",
+                        "startWith": "1",
+                        "minValue": "1",
+                        "maxValue": "2147483647",
+                        "cache": "1",
+                        "cycle": false
+                    }
+                },
+                "userId": {
+                    "name": "userId",
+                    "type": "varchar",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "slug": {
+                    "name": "slug",
+                    "type": "varchar(255)",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "title": {
+                    "name": "title",
+                    "type": "varchar(128)",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "content": {
+                    "name": "content",
+                    "type": "varchar(15000)",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "category": {
+                    "name": "category",
+                    "type": "varchar",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "upvotes": {
+                    "name": "upvotes",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": 0
+                },
+                "downvotes": {
+                    "name": "downvotes",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": 0
+                },
+                "bounty": {
+                    "name": "bounty",
+                    "type": "double precision",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": 0
+                },
+                "created_at": {
+                    "name": "created_at",
+                    "type": "timestamp",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "now()"
+                }
+            },
+            "indexes": {},
+            "foreignKeys": {
+                "posts_userId_users_ocid_fk": {
+                    "name": "posts_userId_users_ocid_fk",
+                    "tableFrom": "posts",
+                    "tableTo": "users",
+                    "columnsFrom": ["userId"],
+                    "columnsTo": ["ocid"],
+                    "onDelete": "no action",
+                    "onUpdate": "no action"
+                },
+                "posts_category_categories_name_fk": {
+                    "name": "posts_category_categories_name_fk",
+                    "tableFrom": "posts",
+                    "tableTo": "categories",
+                    "columnsFrom": ["category"],
+                    "columnsTo": ["name"],
+                    "onDelete": "no action",
+                    "onUpdate": "no action"
+                }
+            },
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {},
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        },
+        "public.stats": {
+            "name": "stats",
+            "schema": "",
+            "columns": {
+                "id": {
+                    "name": "id",
+                    "type": "integer",
+                    "primaryKey": true,
+                    "notNull": true,
+                    "identity": {
+                        "type": "always",
+                        "name": "stats_id_seq",
+                        "schema": "public",
+                        "increment": "1",
+                        "startWith": "1",
+                        "minValue": "1",
+                        "maxValue": "2147483647",
+                        "cache": "1",
+                        "cycle": false
+                    }
+                },
+                "distributedUpvotePrize": {
+                    "name": "distributedUpvotePrize",
+                    "type": "double precision",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": 0
+                },
+                "distributedDownvoteCutoff": {
+                    "name": "distributedDownvoteCutoff",
+                    "type": "double precision",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": 0
+                }
+            },
+            "indexes": {},
+            "foreignKeys": {},
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {},
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        },
+        "public.users": {
+            "name": "users",
+            "schema": "",
+            "columns": {
+                "ocid": {
+                    "name": "ocid",
+                    "type": "varchar(255)",
+                    "primaryKey": true,
+                    "notNull": true
+                },
+                "wallet": {
+                    "name": "wallet",
+                    "type": "varchar(64)",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "avatar": {
+                    "name": "avatar",
+                    "type": "varchar(255)",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "balance": {
+                    "name": "balance",
+                    "type": "double precision",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": 0
+                },
+                "verified": {
+                    "name": "verified",
+                    "type": "boolean",
+                    "primaryKey": false,
+                    "notNull": false,
+                    "default": false
+                },
+                "created_at": {
+                    "name": "created_at",
+                    "type": "timestamp",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "now()"
+                }
+            },
+            "indexes": {},
+            "foreignKeys": {},
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {
+                "users_wallet_unique": {
+                    "name": "users_wallet_unique",
+                    "nullsNotDistinct": false,
+                    "columns": ["wallet"]
+                }
+            },
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        },
+        "public.verification_wallets": {
+            "name": "verification_wallets",
+            "schema": "",
+            "columns": {
+                "address": {
+                    "name": "address",
+                    "type": "varchar(64)",
+                    "primaryKey": true,
+                    "notNull": true
+                },
+                "privateKey": {
+                    "name": "privateKey",
+                    "type": "varchar",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "userId": {
+                    "name": "userId",
+                    "type": "varchar",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "verified": {
+                    "name": "verified",
+                    "type": "boolean",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": false
+                },
+                "created_at": {
+                    "name": "created_at",
+                    "type": "timestamp",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "now()"
+                }
+            },
+            "indexes": {},
+            "foreignKeys": {
+                "verification_wallets_userId_users_ocid_fk": {
+                    "name": "verification_wallets_userId_users_ocid_fk",
+                    "tableFrom": "verification_wallets",
+                    "tableTo": "users",
+                    "columnsFrom": ["userId"],
+                    "columnsTo": ["ocid"],
+                    "onDelete": "no action",
+                    "onUpdate": "no action"
+                }
+            },
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {},
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        },
+        "public.votes": {
+            "name": "votes",
+            "schema": "",
+            "columns": {
+                "id": {
+                    "name": "id",
+                    "type": "integer",
+                    "primaryKey": true,
+                    "notNull": true,
+                    "identity": {
+                        "type": "always",
+                        "name": "votes_id_seq",
+                        "schema": "public",
+                        "increment": "1",
+                        "startWith": "1",
+                        "minValue": "1",
+                        "maxValue": "2147483647",
+                        "cache": "1",
+                        "cycle": false
+                    }
+                },
+                "userId": {
+                    "name": "userId",
+                    "type": "varchar",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "entityId": {
+                    "name": "entityId",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "postId": {
+                    "name": "postId",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "isUpvote": {
+                    "name": "isUpvote",
+                    "type": "boolean",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "created_at": {
+                    "name": "created_at",
+                    "type": "timestamp",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "now()"
+                }
+            },
+            "indexes": {},
+            "foreignKeys": {
+                "votes_userId_users_ocid_fk": {
+                    "name": "votes_userId_users_ocid_fk",
+                    "tableFrom": "votes",
+                    "tableTo": "users",
+                    "columnsFrom": ["userId"],
+                    "columnsTo": ["ocid"],
+                    "onDelete": "no action",
+                    "onUpdate": "no action"
+                }
+            },
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {},
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        }
+    },
+    "enums": {
+        "public.entity_type": {
+            "name": "entity_type",
+            "schema": "public",
+            "values": ["post", "answer"]
+        }
+    },
+    "schemas": {},
+    "sequences": {},
+    "roles": {},
+    "policies": {},
+    "views": {},
+    "_meta": {
+        "columns": {},
+        "schemas": {},
+        "tables": {}
+    }
+}

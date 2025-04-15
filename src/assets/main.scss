@@ -1,0 +1,23 @@
+.content-wrapper {
+    &:has(main.grid) {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 24px;
+
+        @include W(1150px) {
+            padding: 0 12px;
+        }
+
+        > main {
+            grid-column: 3 / span 8;
+
+            @include W(1920px) {
+                grid-column: 2 / span 10;
+            }
+
+            @include W(1150px) {
+                grid-column: 1 / span 12;
+            }
+        }
+    }
+}

@@ -1,0 +1,194 @@
+#post-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: calc(100dvh - 84px);
+
+    &:has(.no-answers) {
+        justify-content: space-between;
+    }
+
+    #post {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        .top {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--gray);
+            padding-bottom: 12px;
+
+            .post-info {
+                display: flex;
+                flex-direction: column;
+
+                h1 {
+                    font-size: 32px;
+                    margin-top: 0;
+                }
+
+                .metadata {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 12px;
+
+                    p {
+                        color: var(--dgray);
+                        font-size: 12px;
+
+                        span {
+                            color: var(--ddgray);
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 12px;
+            padding-bottom: 24px;
+
+            .user-container {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                width: 100%;
+            }
+
+            .actions {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                padding: 0 12px 0 0;
+
+                button {
+                    padding: 0;
+
+                    &.copy-button svg {
+                        height: 14px;
+                        width: 14px;
+                    }
+                }
+            }
+        }
+
+        .tiptap {
+            padding: 12px 0;
+        }
+
+        .question {
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .content {
+            margin: 12px 0;
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            h4 {
+                font-size: 18px;
+            }
+
+            h5 {
+                font-size: 16px;
+            }
+
+            h6 {
+                font-size: 16px;
+            }
+
+            p {
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+        }
+
+        // Sections
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 24px;
+
+            &:has(.no-answers) {
+                flex: 1;
+                align-items: center;
+                justify-content: center;
+                padding: 48px 0;
+
+                .no-answers {
+                    @include dcc;
+                    flex-direction: column;
+                    gap: 12px;
+
+                    p {
+                        color: var(--ddgray);
+                    }
+
+                    ul {
+                        list-style: disc;
+                        margin-top: 24px;
+
+                        li {
+                            margin-top: 8px;
+                        }
+                    }
+                }
+            }
+
+            .answer {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+                border-radius: 8px;
+                transition: 300ms;
+
+                > div:first-child {
+                    display: flex;
+                    gap: 24px;
+                }
+
+                &:not(:last-child),
+                &:first-child {
+                    border-bottom: 1px solid var(--gray);
+                }
+
+                &:has(.accepted) {
+                    padding: 12px 24px 0 24px;
+                    border: 1px solid var(--success);
+                    background: radial-gradient(#fff 60%, rgba(0, 128, 0, 0.096));
+
+                    .vote-btn {
+                        background: #fff;
+                        border: 1px solid var(--success);
+
+                        &.voted {
+                            background: var(--success);
+                            border: 1px solid var(--success);
+                        }
+                    }
+                }
+
+                > div:nth-child(2) {
+                    flex: 1;
+                }
+            }
+        }
+    }
+}

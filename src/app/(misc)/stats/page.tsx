@@ -1,0 +1,75 @@
+import Logo from "@/components/Logo";
+import { TotalVotes } from "@/actions/stats/TotalVotes";
+
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
+
+import "./stats.scss";
+
+export default async function Stats() {
+    const voteStats = await TotalVotes();
+    const progress = (voteStats.upvotes / 100_000) * 100;
+
+    return (
+        <main className="grid">
+            <div id="stats">
+                <h1>Statistics</h1>
+                <div className="flex items-start gap-4">
+                    <div className="box">
+                        <h2>Distributed Prize</h2>
+                        <p className="value">
+                            <Logo size={36} />
+                            {voteStats.distributedUpvotePrize}
+                        </p>
+                        <p>$LP tokens distributed</p>
+                    </div>
+                    <div className="box">
+                        <h2>Cutoff Amount</h2>
+                        <p className="value">
+                            <Logo size={36} />
+                            {voteStats.distributedDownvoteCutoff}
+                        </p>
+                        <p>$LP tokens reduced from user balance</p>
+                    </div>
+                </div>
+                <div className="box total upvotes">
+                    <h2>Upvotes</h2>
+                    <p className="value">
+                        {voteStats.upvotes}
+                        <FaChevronUp size={18} color="rgb(17, 167, 62)" />
+                    </p>
+                    <p>
+                        In <span>{voteStats.answers}</span> answers
+                    </p>
+                </div>
+                <div className="box total downvotes">
+                    <h2>Downvotes</h2>
+                    <p className="value">
+                        {voteStats.upvotes}
+                        <FaChevronDown size={18} color="rgb(201, 8, 8)" />
+                    </p>
+                </div>
+                <div className="flex items-start gap-4">
+                    <div className="box prize-amount">
+                        <h2>Upvote Prize Amount</h2>
+                        <p className="value">
+                            <Logo size={36} />
+                            {voteStats.upvotePrize}
+                        </p>
+                    </div>
+                    <div className="box prize-amount">
+                        <h2>Downvote Cutoff Amount</h2>
+                        <p className="value">
+                            <Logo size={36} />-{voteStats.downvoteCutoff}
+                        </p>
+                    </div>
+                </div>
+                <div className="box halving">
+                    <p>Until prize halving ({progress.toFixed(3)}%)</p>
+                    <div className="progress-bar">
+                        <div className="progress" style={{ width: `${progress}%` }}></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    );
+}

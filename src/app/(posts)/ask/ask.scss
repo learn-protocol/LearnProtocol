@@ -1,0 +1,70 @@
+#ask {
+    h1 {
+        font-size: 27px;
+    }
+
+    .greeting {
+        @include colorful-box;
+        position: relative;
+
+        .close {
+            position: absolute;
+            right: 6px;
+            top: 0px;
+            padding: 0;
+            cursor: pointer;
+        }
+    }
+
+    form {
+        $gap: 12px;
+
+        display: flex;
+        flex-direction: column;
+        gap: $gap;
+        margin-top: 12px;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            label {
+                font-size: 15px;
+                font-weight: 500;
+
+                small {
+                    font-size: 12px;
+                    font-family: "Poppins";
+                    color: var(--dgray);
+                }
+            }
+
+            #content {
+                min-height: 240px !important;
+                max-height: 500px !important;
+            }
+
+            &:has(label.preview-label.hidden) {
+                margin-top: -$gap;
+            }
+        }
+    }
+
+    .guidelines {
+        margin-top: 20px;
+
+        h3 {
+            font-size: 24px;
+        }
+
+        h4 {
+            font-size: 18px;
+            margin-top: 12px;
+        }
+
+        p {
+            color: var(--ddgray);
+        }
+    }
+}
