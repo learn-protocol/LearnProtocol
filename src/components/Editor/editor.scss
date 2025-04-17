@@ -249,6 +249,7 @@ $radius: calc(var(--radius) - 2px);
 .control-group {
     display: flex;
     justify-content: space-between;
+    overflow-x: auto;
     padding: 0.25rem 0.75rem;
     border: 1px solid hsl(var(--input));
     border-radius: $radius $radius 0 0;

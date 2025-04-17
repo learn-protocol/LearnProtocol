@@ -32,12 +32,12 @@ export default async function InnerUserLayout({
 
                     <div className="user-details flex flex-col gap-2">
                         {/* Username and wallet address */}
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-3 max-lg:flex-col max-lg:items-start max-lg:gap-0">
                             <h2>
                                 {username}
                                 {user.verified && <RiVerifiedBadgeFill color="#2f4ce7" size={28} />}
                             </h2>
-                            <small className="mt-3">
+                            <small className="mt-3 max-lg:mt-0">
                                 <a
                                     href={`https://educhain.blockscout.com/address/${user.wallet}`}
                                     target="_blank"

@@ -94,7 +94,7 @@ export default function UserStatistics() {
                     hasNextPage={hasNextPagePost}
                     isFetchingNextPage={isFetchingNextPagePost}
                 />
-                <div className="col-span-2">
+                <div className="col-span-2 max-2xl:col-span-4">
                     <EarningChart data={userEarningsStats} />
                 </div>
             </div>
@@ -158,7 +158,7 @@ function UserAnswers({
     isFetchingNextPage: boolean;
 }) {
     return (
-        <div className="user-table">
+        <div className="user-table max-2xl:col-span-2">
             <h3>Answers</h3>
             {status === "error" && <p className="text-red-600 text-md">{error.message}</p>}
             {isFetching ? (
@@ -245,7 +245,7 @@ function UserPosts({
     isFetchingNextPage: boolean;
 }) {
     return (
-        <div className="user-table">
+        <div className="user-table max-2xl:col-span-2">
             <h3>Questions</h3>
             {status === "error" && <p className="text-red-600 text-md">{error.message}</p>}
             {isFetching ? (
@@ -254,27 +254,28 @@ function UserPosts({
                 <>
                     {datas?.pages?.[0]?.posts?.length ? (
                         <>
-                            <table>
-                                <tbody>
-                                    {datas.pages.map((group: any, i: number) => (
-                                        <Fragment key={i}>
-                                            {group.posts.map((data: any, j: number) => (
-                                                <tr key={data.createdAt.toString() + i + j}>
-                                                    <td>
-                                                        <Link
-                                                            href={`/post/${data.slug}-${data.id}`}
-                                                            className="title"
-                                                        >
-                                                            {data.title}
-                                                        </Link>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </Fragment>
-                                    ))}
-                                </tbody>
-                            </table>
-                            <br />
+                            <div className="table-container">
+                                <table>
+                                    <tbody>
+                                        {datas.pages.map((group: any, i: number) => (
+                                            <Fragment key={i}>
+                                                {group.posts.map((data: any, j: number) => (
+                                                    <tr key={data.createdAt.toString() + i + j}>
+                                                        <td>
+                                                            <Link
+                                                                href={`/post/${data.slug}-${data.id}`}
+                                                                className="title"
+                                                            >
+                                                                {data.title}
+                                                            </Link>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </Fragment>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                             {status === "success" && more && (
                                 <Button
                                     variant="outline"

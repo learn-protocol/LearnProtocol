@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 export default function Litepaper() {
     return (
         <main className="grid">
-            <div id="litepaper">
-                <h1>Learn Protocol - Litepaper</h1>
+            <div id="litepaper" className="max-[1150px]:pt-16">
+                <h1>Litepaper</h1>
                 <div className="table-of-contents">
                     <ol>
                         <li>
