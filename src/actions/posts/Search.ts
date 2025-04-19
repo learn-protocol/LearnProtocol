@@ -45,11 +45,11 @@ export async function SearchPosts({
         ),
         db.execute(
             sql`
-                SELECT COUNT(*) FROM posts
+                SELECT COUNT(*)::int AS total FROM posts
                 WHERE (
-                    to_tsvector('english', title || ' ' || content) @@ ${tsQuery}
-                    OR title ILIKE ${`%${cleanedQuery}%`}
-                    OR content ILIKE ${`%${cleanedQuery}%`}
+                to_tsvector('english', title || ' ' || content) @@ websearch_to_tsquery('english', ${cleanedQuery})
+                OR title ILIKE ${`%${cleanedQuery}%`}
+                OR content ILIKE ${`%${cleanedQuery}%`}
                 )
           `,
         ),

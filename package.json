@@ -11,7 +11,7 @@
         "migrate": "drizzle-kit migrate",
         "generate": "drizzle-kit generate",
         "studio": "drizzle-kit studio",
-        "pm2": "pm2 start npm --name learnprotocol.id -- start"
+        "pm2": "pm2 start npm --name learnprotocol -- start"
     },
     "dependencies": {
         "@aws-sdk/client-s3": "^3.782.0",

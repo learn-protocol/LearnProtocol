@@ -54,15 +54,17 @@ export default async function PostList({
         revalidate: 60,
     });
 
+    const perPage = 25;
+
     let posts: Post[] = [];
     let total = 0;
 
     if (!query) {
-        const latestPosts = await LatestPosts({ page, perPage: 25, category });
+        const latestPosts = await LatestPosts({ page, perPage, category });
         posts = latestPosts.posts;
         total = latestPosts.total;
     } else {
-        const queryPosts = await SearchPosts({ query, page, perPage: 2 });
+        const queryPosts = await SearchPosts({ query: decodeURIComponent(query), page, perPage });
         posts = queryPosts.posts;
         total = queryPosts.total;
     }
@@ -101,7 +103,14 @@ export default async function PostList({
                     })}
 
                     {/* Pagination */}
-                    {total > 25 && <Pagination total={total} currentPage={page} />}
+                    {total > perPage && (
+                        <Pagination
+                            total={total}
+                            perPage={perPage}
+                            currentPage={page}
+                            query={query ?? null}
+                        />
+                    )}
                 </>
             ) : (
                 <div className="no-posts">

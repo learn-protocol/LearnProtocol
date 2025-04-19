@@ -30,7 +30,7 @@ export default async function SearchPage({
             {/* Posts */}
             <div className="post-container">
                 <Suspense fallback={<PostSkeleton />}>
-                    <PostList page={Number(p) || 1} query={decodeURIComponent(q)} />
+                    <PostList page={Number(p) || 1} query={q} />
                 </Suspense>
             </div>
         </div>

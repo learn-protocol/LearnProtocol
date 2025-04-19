@@ -6,10 +6,12 @@ export default function Pagination({
     total,
     currentPage = 1,
     perPage = 25,
+    query = null,
 }: {
     total: number;
     currentPage?: number;
     perPage?: number;
+    query?: string | null;
 }) {
     const totalPages = Math.ceil(total / perPage);
 
@@ -22,7 +24,7 @@ export default function Pagination({
                     if (totalPages > 6 && i > 0 && i < totalPages - 1) {
                         if (Math.abs(diff) === 2) {
                             return (
-                                <span className="dots" key={i}>
+                                <span className="_dots" key={i}>
                                     ...
                                 </span>
                             );
@@ -30,7 +32,11 @@ export default function Pagination({
                         if (diff > 1 || diff < -2) return null;
                     }
                     return (
-                        <Link href={`/?p=${i + 1}`} className={currentPage === i + 1 ? "active" : ""} key={i}>
+                        <Link
+                            href={`/${query ? `search/${query}` : ""}?p=${i + 1}`}
+                            className={currentPage === i + 1 ? "active" : ""}
+                            key={i}
+                        >
                             {i + 1}
                         </Link>
                     );
