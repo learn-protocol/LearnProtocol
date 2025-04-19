@@ -32,7 +32,7 @@ Utility Contract: [0x0B5C76a9915b73c735F78c15dd39642549F4A862](https://edu-chain
 - Create a new database in Postgres and update the connection string in `.env.local` file.
 - Run `npm run generate` and `npm run migrate` to create the database tables and seed the initial data.
 - Run `npm run dev` to start the development server.
-- Open your browser and navigate to `http://localhost:3000` to see the app in action.
+- Open your browser and navigate to `http://localhost:5777` to see the app in action.
 
 ## Notice for EDU Chain Hackathon
 
