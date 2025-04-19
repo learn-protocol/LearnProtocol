@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import Logo from "../Logo";
+import Search from "../Search";
 import Profile from "./Profile";
 import { Button } from "../ui/button";
 import HeaderLink from "./HeaderLink";
@@ -25,6 +26,7 @@ export default function Header() {
                         Blog
                     </a>
                 </div>
+                <Search />
                 <div className="actions">
                     <Button variant="outline" asChild>
                         <Link href="/ask" className="ask-btn">

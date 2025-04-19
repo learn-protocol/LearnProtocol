@@ -1,11 +1,12 @@
-import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { clsx, type ClassValue } from "clsx";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-export function DDMMYYYYHHMM(date: Date): string {
+export function DDMMYYYYHHMM(date: Date | string): string {
+    if (typeof date === "string") date = new Date(date);
     const pad = (n: number) => n.toString().padStart(2, "0");
 
     const day = pad(date.getDate());
@@ -81,4 +82,23 @@ export function slugToTitle(slug: string) {
     const words = slug.split("-");
     const title = words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     return title;
+}
+
+export function queryToTitle(query: string) {
+    const words = query.split("+");
+    const title = words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    return title;
+}
+
+export function toCamelCase<T>(obj: Record<string, any>): T {
+    return Object.fromEntries(
+        Object.entries(obj).map(([key, value]) => {
+            const camelKey = key.replace(/_([a-z])/g, (_, char) => char.toUpperCase());
+            return [camelKey, value];
+        }),
+    ) as T;
+}
+
+export function toCamelCaseArray<T = any>(arr: Record<string, any>[]): T[] {
+    return arr.map(item => toCamelCase<T>(item));
 }

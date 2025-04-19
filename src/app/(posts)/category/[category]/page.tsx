@@ -14,9 +14,10 @@ export async function generateMetadata({
     const { category } = await params;
 
     const categoryDetails = await GetCategory(category);
+    const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1);
 
     return {
-        title: `${category} - Learn Protocol`,
+        title: `${capitalizedCategory} - Learn Protocol`,
         description: categoryDetails?.description || `Explore posts in this ${category} category`,
     };
 }

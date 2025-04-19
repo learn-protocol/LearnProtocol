@@ -8,6 +8,7 @@ import Logo from "../Logo";
 import Pagination from "../Pagination";
 import { DDMMYYYYHHMM } from "@/lib/utils";
 import CategoryIcon from "../Category/Icons";
+import { SearchPosts } from "@/actions/posts/Search";
 import { LatestPosts } from "@/actions/posts/LatestPosts";
 
 export interface Post {
@@ -41,9 +42,11 @@ const stripHtmlWithSpaces = (html: string) => {
 
 export default async function PostList({
     page,
+    query,
     category = null,
 }: {
     page: number;
+    query?: string | null;
     category?: string | null;
 }) {
     unstable_cacheLife({
@@ -51,7 +54,18 @@ export default async function PostList({
         revalidate: 60,
     });
 
-    const { posts, total } = await LatestPosts({ page, perPage: 25, category });
+    let posts: Post[] = [];
+    let total = 0;
+
+    if (!query) {
+        const latestPosts = await LatestPosts({ page, perPage: 25, category });
+        posts = latestPosts.posts;
+        total = latestPosts.total;
+    } else {
+        const queryPosts = await SearchPosts({ query, page, perPage: 2 });
+        posts = queryPosts.posts;
+        total = queryPosts.total;
+    }
 
     return (
         <>

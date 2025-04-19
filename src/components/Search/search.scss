@@ -1,0 +1,28 @@
+.search-container {
+    position: relative;
+    display: flex;
+
+    input {
+        padding-right: 32px;
+    }
+
+    button {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        width: 24px;
+        height: calc(100% - 8px);
+        border-radius: 4px;
+
+        .search-icon {
+            width: 14px;
+            height: 14px;
+            transition: 150ms;
+            color: var(--dgray);
+        }
+
+        &:hover .search-icon {
+            color: var(--primary);
+        }
+    }
+}

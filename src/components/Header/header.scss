@@ -49,7 +49,6 @@ header {
         .links {
             @include dc;
             gap: 12px;
-            flex: 1;
 
             @include W(800px) {
                 display: none;
@@ -65,6 +64,10 @@ header {
                     color: #000;
                 }
             }
+        }
+
+        .search-container {
+            flex: 1;
         }
 
         .actions {

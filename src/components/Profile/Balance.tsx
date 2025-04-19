@@ -12,7 +12,8 @@ export default function BalanceContainer() {
         <div className="balance-container">
             <p>You have</p>
             <h2>
-                <Logo size={32} /> {user.balance}
+                <Logo size={32} />{" "}
+                {user.balance.toString().includes(".") ? user.balance.toFixed(2) : user.balance}
             </h2>
             <p>$LP tokens in your account</p>
             <Withdraw />
