@@ -47,6 +47,8 @@ const Tiptap = ({
     onChange = () => {},
     showLength = false,
     heightFit = false,
+    clear = false,
+    setClear = () => {},
 }: {
     ref?: any;
     value?: string;
@@ -56,6 +58,8 @@ const Tiptap = ({
     onChange?: (content: string) => void;
     showLength?: boolean;
     heightFit?: boolean;
+    clear?: boolean;
+    setClear?: (clear: boolean) => void;
 }) => {
     const [characterCount, setCharacterCount] = useState(0);
     const [wordCount, setWordCount] = useState(0);
@@ -103,6 +107,14 @@ const Tiptap = ({
             editor.setEditable(false);
         }
     }, [editor, readOnly]);
+
+    useEffect(() => {
+        if (editor && clear) {
+            editor.commands.clearContent(true)
+            editor.commands.setContent("");
+            setClear(false);
+        }
+    }, [editor, clear]);
 
     if (!editor) {
         return null;

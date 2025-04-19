@@ -1,10 +1,10 @@
 "use client";
 
+import { toast } from "sonner";
 import { useReCaptcha } from "next-recaptcha-v3";
 import { startTransition, useActionState, useEffect, useRef, useState } from "react";
 
 import Tiptap from "@/components/Editor";
-import { toast } from "@/hooks/use-toast";
 import PublishAnswerButton from "./PublishButton";
 import { useAnswerTextareaStore } from "@/lib/states";
 import { AnswerPost } from "@/actions/posts/AddAnswer";
@@ -20,6 +20,7 @@ export default function WriteAnswer({ id }: { id: number }) {
 
     const answerState = useAnswerTextareaStore();
 
+    const [clear, setClear] = useState(false);
     const [content, setContent] = useState("");
 
     useEffect(() => {
@@ -36,11 +37,11 @@ export default function WriteAnswer({ id }: { id: number }) {
     useEffect(() => {
         // Error message handling
         if (state && "errors" in state && !["content"].includes(Object.keys(state.errors)[0])) {
-            toast({
-                variant: "destructive",
-                title: "Something went wrong",
-                description: Object.values(state.errors)[0],
-            });
+            toast.error("Object.values(state.errors)[0]");
+        }
+        else if ((state as any)?.id) {
+            setClear(true);
+            toast.success("Your answer has been submitted successfully.");
         }
     }, [state]);
 
@@ -66,12 +67,15 @@ export default function WriteAnswer({ id }: { id: number }) {
         <div className="write-answer">
             <form onSubmit={handleSubmit}>
                 <Tiptap
+                    value={content}
                     ref={textAreaRef}
                     maxLength={10000}
                     placeholder="Write your answer..."
                     onChange={(c: string) => {
                         setContent(c);
                     }}
+                    clear={clear}
+                    setClear={setClear}
                 />
                 <textarea
                     style={{ visibility: "hidden", height: 0 }}
