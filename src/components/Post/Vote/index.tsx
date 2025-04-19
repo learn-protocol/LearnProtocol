@@ -113,7 +113,7 @@ export default function Vote({
             <div
                 className={
                     "vote-btn downvote " +
-                    ((isVoted || isAnswerOwner) ? "disabled " : " ") +
+                    (isVoted || isAnswerOwner ? "disabled " : " ") +
                     (isVoted && voters.filter(v => v.user === user?.ocid)[0].isUpvote === false
                         ? "voted"
                         : "")
