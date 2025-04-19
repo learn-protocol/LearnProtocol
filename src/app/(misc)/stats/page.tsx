@@ -47,7 +47,7 @@ export default async function Stats() {
                 <div className="box total downvotes">
                     <h2>Downvotes</h2>
                     <p className="value">
-                        {voteStats.upvotes}
+                        {voteStats.downvotes}
                         <FaChevronDown size={18} color="rgb(201, 8, 8)" />
                     </p>
                 </div>
